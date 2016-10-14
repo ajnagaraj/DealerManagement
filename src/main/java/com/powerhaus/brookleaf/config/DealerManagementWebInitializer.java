@@ -14,7 +14,7 @@ public class DealerManagementWebInitializer extends AbstractAnnotationConfigDisp
     
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { DealerManagementWebInitializer.class };
+        return new Class[] { DealerManagementWebConfiguration.class };
     }
     
     @Override
