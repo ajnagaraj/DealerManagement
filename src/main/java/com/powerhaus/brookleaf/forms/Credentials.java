@@ -7,13 +7,14 @@ import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToStrin
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 public class Credentials {
+    private static final String SIZE_ERROR = "must be between 5 and 36 characters long";
     
     @NotNull
-    @Size(min=5, max=36)
+    @Size(message=SIZE_ERROR, min=5, max=36)
     private String email;
     
     @NotNull
-    @Size(min=5, max=36)
+    @Size(message=SIZE_ERROR, min=5, max=36)
     private String password;
     
     public Credentials() { }
