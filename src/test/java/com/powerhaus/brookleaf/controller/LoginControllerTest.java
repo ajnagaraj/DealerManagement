@@ -1,6 +1,5 @@
 package com.powerhaus.brookleaf.controller;
 
-import com.powerhaus.brookleaf.model.Credentials;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 

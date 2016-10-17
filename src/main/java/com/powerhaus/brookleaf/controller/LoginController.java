@@ -1,7 +1,7 @@
 package com.powerhaus.brookleaf.controller;
 
 
-import com.powerhaus.brookleaf.model.Credentials;
+import com.powerhaus.brookleaf.forms.Credentials;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
