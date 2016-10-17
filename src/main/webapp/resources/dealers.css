@@ -1,0 +1,29 @@
+#content {
+    text-align: center;
+}
+
+#search {
+    padding-bottom: 5%;
+    text-align: left;
+}
+
+#dealer-bar {
+    text-align: right;
+}
+
+body {
+    font-family: Quicksand;
+}
+
+.container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#search-thumbnail + .thumbnail {
+    border: none;
+}
+
+#empty-dealers {
+    text-align: center;
+}

@@ -1,12 +1,8 @@
 package com.powerhaus.brookleaf.controller;
 
-
-import org.apache.commons.logging.Log;
+import com.powerhaus.brookleaf.model.Credentials;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -35,4 +31,41 @@ public class LoginControllerTest {
                 .andExpect(view().name("login"));
     }
         
+    @Test
+    public void shouldSuccessfullyLoginAndRedirectToDealers() throws Exception {
+        LoginController controller = new LoginController();
+        
+        MockMvc mockMvc = standaloneSetup(controller).build();
+        
+        mockMvc.perform(post("/")
+                .param("email", "anagaraj@gmail.com")
+                .param("password", "anagaraj"))
+                .andExpect(redirectedUrl("/dealers"));
+    }
+
+    @Test
+    public void shouldValidateEmailAndPasswordForMaximumCharacters() throws Exception {
+        LoginController controller = new LoginController();
+        
+        MockMvc mockMvc = standaloneSetup(controller).build();
+        
+        mockMvc.perform(post("/")
+                .param("email", "emailHasMoreThanRequiredNumberOfCharactersAndIsOutOfRange")
+                .param("password", "passwordHasMoreThanRequiredNumberOfCharactersAndIsOutOfRange"))
+                .andExpect(model().attributeHasFieldErrors("credentials", "email", "password"))
+                .andExpect(view().name("login"));
+    }
+    
+    @Test
+    public void shouldValidateEmailAndPasswordIfEmpty() throws Exception {
+        LoginController controller = new LoginController();
+        
+        MockMvc mockMvc = standaloneSetup(controller).build();
+        
+        mockMvc.perform(post("/")
+                .param("email", "")
+                .param("password", ""))
+                .andExpect(model().attributeHasFieldErrors("credentials", "email", "password"))
+                .andExpect(view().name("login"));
+    }
 }

@@ -19,6 +19,7 @@ public class DealerManagementWebInitializer extends AbstractAnnotationConfigDisp
     
     @Override
     protected String[] getServletMappings() {
+        
         return new String[] { "/" };
     }
 }
