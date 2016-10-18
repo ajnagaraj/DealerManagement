@@ -1,0 +1,14 @@
+body {
+    font-family: Quicksand;
+}
+
+.container {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+
+#content {
+    padding-top: 20%;
+    text-align: left;
+}
