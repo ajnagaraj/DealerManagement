@@ -64,7 +64,7 @@ public class ProductRepositoryTest {
     public void shouldDeleteProduct() {
         // Setup
         Product product = Product.builder()
-                .withName("Bog Rolls")
+                .withName("DroneSmart")
                 .withType("Emergency")
                 .build();
         
