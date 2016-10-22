@@ -66,6 +66,16 @@ public class Product {
         return new Builder();
     }
     
+    public static Builder builder(Product product) {
+        Builder builder = new Builder();
+        
+        builder.name = product.name;
+        builder.type = product.type;
+        builder.id = product.id;
+        
+        return builder;
+    }
+    
     public Long getId() {
         
         return id;

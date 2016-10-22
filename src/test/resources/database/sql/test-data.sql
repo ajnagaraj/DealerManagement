@@ -14,7 +14,9 @@ VALUES
 INSERT INTO
 `product` (`id`, `name`,`type`)
 VALUES
-(1, 'SoftBogRoll','Wipes');
+(1, 'SoftBogRoll','Wipes'),
+(2, 'Dash','Cool');
+
 
 INSERT INTO
 `dealer_product` (`dealer_id`, `product_id`)
