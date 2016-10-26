@@ -21,4 +21,10 @@ public interface DealerRepository extends JpaRepository<Dealer, Long> {
     
     Set<Dealer> findByAddress(Address address);
     Set<Dealer> findByAddressZone(String zone);
+    
+    @Query("SELECT d FROM Dealer d JOIN FETCH d.products p WHERE p.name = :name")
+    Set<Dealer> findByProductName(@Param("name") String name);
+    
+    @Query("SELECT d FROM Dealer d JOIN FETCH d.products p WHERE p.type = :type")
+    Set<Dealer> findByProductType(@Param("type") String type);
 }

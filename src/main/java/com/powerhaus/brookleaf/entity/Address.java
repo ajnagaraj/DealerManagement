@@ -1,5 +1,6 @@
 package com.powerhaus.brookleaf.entity;
 
+import com.powerhaus.brookleaf.form.AddressForm;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -115,6 +116,17 @@ public class Address {
         return zone;
     }
     
+    public AddressForm toAddressForm() {
+        AddressForm addressForm = new AddressForm();
+        
+        addressForm.setStreet(getLine());
+        addressForm.setCity(getCity());
+        addressForm.setPostcode(getPostCode());
+        addressForm.setZone(getZone());
+        addressForm.setCountry(getCountry());
+        
+        return addressForm;
+    }
     @Override
     public boolean equals(Object o) {
         

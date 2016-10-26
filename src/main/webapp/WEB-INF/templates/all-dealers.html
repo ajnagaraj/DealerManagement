@@ -12,6 +12,7 @@
 
     <script src="https://use.fontawesome.com/1653b43fa4.js"></script>
 
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -32,7 +33,9 @@
                 <!-- Collect the nav links, form, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" th:text="${username}"></a></li>
+                        <li>
+                            <a href="#" th:text="${username}"></a>
+                        </li>
                         <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                     </ul>
@@ -41,26 +44,47 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
-            <div class="col-lg-6 col-sm-6 col-xs-6 dealer-user">
+            <div class="col-lg-6 col-sm-6 col-xs-6">
                 <h1>Dealers</h1>
             </div>
         </div>
         <div class="row">
-            <div class="form-group">
-                <div class="col-lg-6 col-sm-6 col-xs-6">
-                    <div id="search">
-                        <form class="form-inline">
-                            <input type="text" class="form-control" placeholder="Search" />
-                        </form>
-                    </div>
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+                <div id="search">
+                    <input id="search-dealer" type="text" class="form-control" placeholder="Search" />
                 </div>
-                <div class="col-lg-6 col-sm-6 col-xs-6">
-                    <div id="dealer-bar">
-                        <h4><i class="fa fa-trash" aria-hidden="true"></i>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+                <div id="dealer-bar">
+                    <h4><a href="./new-dealer.html" th:href="@{/dealers/new}"><i class="fa fa-user-plus" aria-hidden="true"></i></a>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i>
 &nbsp;<i class="fa fa-envelope" aria-hidden="true"></i>
 </h4>
-                    </div>
                 </div>
             </div>
         </div>
@@ -74,13 +98,15 @@
             </div>
         </div>
         <div class="row">
-            <div th:each="dealer : ${dealers}" class="col-lg-4 col-sm-4 col-xs-6">
+            <div id="id-dealer" th:each="dealer : ${dealers}" class="col-lg-3 col-sm-4 col-xs-6">
                 <div id="content">
                     <div class="thumbnail">
-                        <h4 th:text="${dealer.name}">John Malcovich</h4>
+                        <h5 th:text="${dealer.name}">John Malcovich</h5>
                         <hr/>
-                        <p>john@fox.com</p>
+                        <p th:text="${dealer.email}">john@fox.com</p>
                         <p th:text="${dealer.phone}">081913141</p>
+                        <hr/>
+                        <p class="address" th:text="${dealer.address.city}">Bleak Town</p>
                         <hr/>
                         <p><i class="fa fa-pencil"></i>&nbsp;&nbsp;<i class="fa fa-thumb-tack" aria-hidden="true"></i></p>
                     </div>
@@ -92,6 +118,8 @@
     <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type='text/javascript' src="../../resources/js/all-dealers.js" th:src="@{resources/js/all-dealers.js}"></script>
 </body>
 
 </html>

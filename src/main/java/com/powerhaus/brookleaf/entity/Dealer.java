@@ -1,5 +1,6 @@
 package com.powerhaus.brookleaf.entity;
 
+import com.powerhaus.brookleaf.form.DealerForm;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -167,6 +168,18 @@ public class Dealer {
     
     public Set<Product> getProducts() {
         return Collections.unmodifiableSet(products);
+    }
+    
+    public DealerForm toDealerForm() {
+        DealerForm dealerForm = new DealerForm();
+        
+        dealerForm.setName(getName());
+        dealerForm.setEmail(getEmail());
+        dealerForm.setPhone(getPhone());
+        dealerForm.setAssociate(getAssociate());
+        dealerForm.setAddress(getAddress().toAddressForm());
+        
+        return dealerForm;
     }
     
     @Override

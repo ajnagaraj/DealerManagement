@@ -1,6 +1,6 @@
 package com.powerhaus.brookleaf.repository;
 
-import com.powerhaus.brookleaf.config.DatabaseConfiguration;
+import com.powerhaus.brookleaf.config.DealerManagementRootConfiguration;
 import com.powerhaus.brookleaf.entity.Address;
 import com.powerhaus.brookleaf.entity.Dealer;
 import com.powerhaus.brookleaf.entity.Product;
@@ -12,14 +12,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.Set;
-
-import static java.util.Arrays.*;
+ 
 import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = DatabaseConfiguration.class)
+@ContextConfiguration(classes = DealerManagementRootConfiguration.class)
 @ActiveProfiles("development")
 public class DealerRepositoryTest {
     
@@ -241,6 +239,19 @@ public class DealerRepositoryTest {
                 .withPhone("234234123412")
                 .build();
         
+        assertThat(dealers).containsExactly(expectedDealer);
+    }
+    
+    @Test
+    public void shouldFindDealersByProductName() {
+        Set<Dealer> dealers = dealerRepository.findByProductName("SoftBogRoll");
+    
+        Dealer expectedDealer = Dealer.builder()
+                .withName("Bog")
+                .withEmail("bog@softbogs.com")
+                .withPhone("234234123412")
+                .build();
+    
         assertThat(dealers).containsExactly(expectedDealer);
     }
 }

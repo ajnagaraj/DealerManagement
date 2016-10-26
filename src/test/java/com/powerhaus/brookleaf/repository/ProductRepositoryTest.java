@@ -1,7 +1,6 @@
 package com.powerhaus.brookleaf.repository;
 
-import com.powerhaus.brookleaf.config.DatabaseConfiguration;
-import com.powerhaus.brookleaf.entity.Address;
+import com.powerhaus.brookleaf.config.DealerManagementRootConfiguration;
 import com.powerhaus.brookleaf.entity.Dealer;
 import com.powerhaus.brookleaf.entity.Product;
 import org.junit.Test;
@@ -17,7 +16,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = DatabaseConfiguration.class)
+@ContextConfiguration(classes = DealerManagementRootConfiguration.class)
 @ActiveProfiles("development")
 public class ProductRepositoryTest {
     

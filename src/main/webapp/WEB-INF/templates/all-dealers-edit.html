@@ -1,0 +1,214 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Dealers</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Raleway:400,600|family=Open+Sans" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{resources/dealers.css}" href="../../resources/dealers.css" />
+
+    <script src="https://use.fontawesome.com/1653b43fa4.js"></script>
+
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Powerhaus</a>
+                </div>
+
+                <!-- Collect the nav links, form, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" th:text="${username}"></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <div class="modal fade" id="new-dealer" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title" id="gridSystemModalLabel">Dealer</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="content col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="thumbnail">
+                                            <div class="form-content">
+                                                <form th:action="@{/dealers/new}" th:object="${dealer}" method="post">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label class="form-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" for="inputName">Invalid name</label>
+                                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" th:value="*{name}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" for="inputEmail">Invalid Email</label>
+                                                                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" th:value="*{email}" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" for="inputPhone">Invalid phone</label>
+                                                                        <input type="text" name="phone" class="form-control" id="inputPhone" placeholder="Phone" th:value="*{phone}" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label class="form-error" th:if="${#fields.hasErrors('associate')}" th:errors="*{associate}" for="inputAssociate">Invalid associate</label>
+                                                                <input type="text" name="associate" class="form-control" id="inputAssociate" placeholder="Associate" th:value="*{associate}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <hr/>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label class="form-error" th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}" for="inputStreet">Street cannot be empty</label>
+                                                                <input type="text" name="address.street" class="form-control" id="inputStreet" placeholder="Street" th:value="*{address.street}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-error" th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}" for="inputCity">City cannot be empty</label>
+                                                                        <input type="text" name="address.city" class="form-control" id="inputCity" placeholder="City" th:value="*{address.city}" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-error" th:if="${#fields.hasErrors('address.postcode')}" th:errors="*{address.postcode}" for="inputPostcode">Postcode cannot be empty</label>
+                                                                        <input type="text" name="address.postcode" class="form-control" id="inputPostcode" placeholder="Postcode" th:value="*{address.postcode}" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-error" th:if="${#fields.hasErrors('address.zone')}" th:errors="*{address.zone}" for="inputZone"></label>
+                                                                        <input type="text" name="address.zone" class="form-control" id="inputZone" placeholder="Zone" th:value="*{address.zone}" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-error" th:if="${#fields.hasErrors('address.country')}" th:errors="*{address.country}" for="inputCountry"></label>
+                                                                        <input type="text" name="address.country" class="form-control" id="inputCountry" placeholder="Country" th:value="*{address.country}" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <hr/>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default active">
+                            &nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user-plus" aria-hidden="true">&nbsp;</i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+                <h1>Dealers</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+                <div id="search">
+                    <input id="search-dealer" type="text" class="form-control" placeholder="Search" />
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-6">
+                <div id="dealer-bar">
+                    <h4>
+                        <a data-toggle="modal" href="#" data-target="#new-dealer"><i class="fa fa-user-plus" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(dealers)}" class="row">
+            <div class="col-xs-12">
+                <div id="empty-dealers">
+                    <div class="thumbnail">
+                        <h4>No Dealers Found!</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="id-dealer" th:each="dealer : ${dealers}" class="col-lg-3 col-sm-4 col-xs-6">
+                <div id="content">
+                    <div class="thumbnail">
+                        <h5 th:text="${dealer.name}">John Malcovich</h5>
+                        <hr/>
+                        <p th:text="${dealer.email}">john@fox.com</p>
+                        <p th:text="${dealer.phone}">081913141</p>
+                        <hr/>
+                        <p class="address" th:text="${dealer.address.city}">Bleak Town</p>
+                        <hr/>
+                        <p><i class="fa fa-pencil"></i>&nbsp;&nbsp;<i class="fa fa-thumb-tack" aria-hidden="true"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type='text/javascript' src="../../resources/js/all-dealers.js" th:src="@{resources/js/all-dealers.js}"></script>
+</body>
+
+</html>

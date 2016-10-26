@@ -16,8 +16,13 @@ body {
 }
 
 .container {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
+.address {
+    color: #F39C12;
+    font-size: 0.8em;
 }
 
 #search-thumbnail + .thumbnail {
@@ -28,3 +33,14 @@ body {
     text-align: center;
 }
 
+.form-content {
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.form-error {
+    font-size: 12px;
+    color: #FF4136;
+}

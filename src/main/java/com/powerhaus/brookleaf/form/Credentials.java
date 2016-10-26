@@ -43,27 +43,6 @@ public class Credentials {
     }
     
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        
-        if (!(o instanceof Credentials)) {
-            return false;
-        }
-        
-        Credentials credentials = (Credentials) o;
-    
-        return email != null ? email.equals(credentials.email) : credentials.email == null;
-    }
-    
-    @Override
-    public int hashCode() {
-        
-        return email != null ? email.hashCode() : 0;
-    }
-    
-    @Override
     public String toString() {
         
         return reflectionToString(this, SHORT_PREFIX_STYLE);
