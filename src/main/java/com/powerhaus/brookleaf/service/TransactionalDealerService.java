@@ -6,6 +6,7 @@ import com.powerhaus.brookleaf.repository.DealerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -38,12 +39,25 @@ public class TransactionalDealerService implements DealerService {
     
     @Override
     public Dealer createDealer(Dealer dealer) {
-        notNull(dealer, "Invalid dealer. It dealer cannot be null");
+        notNull(dealer, "Invalid dealer. It cannot be null");
         
         try {
             return dealerRepository.save(dealer);
         } catch(DataAccessException dataAccessFailure) {
             throw new ServiceException("Failed to create dealer", dataAccessFailure);
+        }
+    }
+    
+    @Override
+    @Transactional
+    public Dealer findDealer(Long id) {
+        notNull(id, "Invalid dealer id. It cannot be null");
+        
+        try {
+            Dealer dealer = dealerRepository.findOne(id);
+            return Dealer.builder(dealer).build();
+        } catch(DataAccessException dataAccessFailure) {
+            throw new ServiceException("Failed to find dealer", dataAccessFailure);
         }
     }
     
@@ -129,11 +143,13 @@ public class TransactionalDealerService implements DealerService {
         }
     
         try {
-            return dealerRepository.save(dealer);
+            Dealer updatedDealer = Dealer.builder(dealerRepository.save(dealer)).build();
+            return updatedDealer;
         } catch(DataAccessException dataAccessFailure) {
             throw new ServiceException("Failed to update dealer", dataAccessFailure);
         }
     }
+    
     
     @Override
     public void deleteDealers(List<Dealer> dealers) {

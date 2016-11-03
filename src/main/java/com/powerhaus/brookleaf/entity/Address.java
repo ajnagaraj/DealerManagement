@@ -3,6 +3,7 @@ package com.powerhaus.brookleaf.entity;
 import com.powerhaus.brookleaf.form.AddressForm;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,20 +13,26 @@ import static org.apache.commons.lang3.builder.ToStringStyle.*;
 
 @Embeddable
 public class Address {
+    private static final String NOT_EMPTY_ERROR = "cannot be empty";
     
     @Column
+    @NotEmpty(message = NOT_EMPTY_ERROR)
     private String line;
     
     @Column
+    @NotEmpty(message = NOT_EMPTY_ERROR)
     private String city;
     
     @Column(name = "post_code")
+    @NotEmpty(message = NOT_EMPTY_ERROR)
     private String postCode;
     
     @Column
+    @NotEmpty(message = NOT_EMPTY_ERROR)
     private String country;
     
     @Column
+    @NotEmpty(message = NOT_EMPTY_ERROR)
     private String zone;
     
     private Address(Builder builder) {
@@ -116,17 +123,6 @@ public class Address {
         return zone;
     }
     
-    public AddressForm toAddressForm() {
-        AddressForm addressForm = new AddressForm();
-        
-        addressForm.setStreet(getLine());
-        addressForm.setCity(getCity());
-        addressForm.setPostcode(getPostCode());
-        addressForm.setZone(getZone());
-        addressForm.setCountry(getCountry());
-        
-        return addressForm;
-    }
     @Override
     public boolean equals(Object o) {
         

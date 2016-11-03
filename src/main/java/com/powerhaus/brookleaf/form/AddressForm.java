@@ -65,18 +65,6 @@ public class AddressForm {
         this.country = country;
     }
     
-    public Address toAddress() {
-        Address address = Address.builder()
-                .withLine(getStreet())
-                .withCity(getCity())
-                .withPostcode(getPostcode())
-                .withZone(getZone())
-                .withCountry(getCountry())
-                .build();
-    
-        return address;
-    }
-    
     @Override
     public String toString() {
         return reflectionToString(this, SHORT_PREFIX_STYLE);

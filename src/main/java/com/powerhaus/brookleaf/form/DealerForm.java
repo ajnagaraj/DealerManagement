@@ -14,6 +14,8 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 public class DealerForm {
     private static final String PHONE_PATTERN = "^[0-9\\-]*$";
     
+    private Long id;
+    
     @NotEmpty(message = "Please enter a name")
     private String name;
     
@@ -67,22 +69,16 @@ public class DealerForm {
         return address;
     }
     
-    public void setAddress(AddressForm addressForm) {
-        this.address = addressForm;
+    public Long getId() {
+        return id;
     }
     
-    public Dealer toDealer() {
-        Address address = getAddress().toAddress();
-        
-        Dealer dealer = Dealer.builder()
-                .withName(getName())
-                .withEmail(getEmail())
-                .withPhone(getPhone())
-                .withAssociate(getAssociate())
-                .withAddress(address)
-                .build();
-        
-        return dealer;
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public void setAddress(AddressForm addressForm) {
+        this.address = addressForm;
     }
     
     @Override

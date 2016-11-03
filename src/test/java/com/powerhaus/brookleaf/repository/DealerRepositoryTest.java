@@ -95,13 +95,13 @@ public class DealerRepositoryTest {
         assertThat(dealer.getEmail()).isEqualTo("arial@clean.com");
         
         Dealer editedDealer = Dealer.builder(dealer)
-                .withEmail("arial-washing.co.uk")
+                .withEmail("arial@washing.co.uk")
                 .build();
         
         Dealer updatedDealer = dealerRepository.save(editedDealer);
         
         assertThat(updatedDealer != editedDealer);
-        assertThat(updatedDealer.getEmail()).isEqualTo("arial-washing.co.uk");
+        assertThat(updatedDealer.getEmail()).isEqualTo("arial@washing.co.uk");
         
         assertThat(updatedDealer.getId()).isEqualTo(1L);
     }

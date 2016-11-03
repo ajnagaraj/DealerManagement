@@ -45,28 +45,306 @@
             <!-- /.container-fluid -->
         </nav>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Launch demo modal
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <!-- New dealer modal -->
+        <div class="modal fade" id="new-dealer" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        <button type="button" id="exit-create-dealer" onclick="refreshDealers()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title" id="gridSystemModalLabel">Dealer</h2>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <div class="row">
+                            <div class="content col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="thumbnail">
+                                            <div class="form-content">
+                                                <form method="post">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="inputName">Name</label>
+                                                                <label class="form-error" id="name-error" for="inputName">&nbsp;</label>
+                                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="inputEmail">Email</label>
+                                                                        <label class="form-error" id="email-error" for="inputEmail">&nbsp;</label>
+                                                                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="inputPhone">Phone</label>
+                                                                        <label class="form-error" id="phone-error" for="inputPhone">&nbsp;</label>
+                                                                        <input type="text" name="phone" class="form-control" id="inputPhone" placeholder="Phone" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="inputAssociate">Associate</label>
+                                                                <label class="form-error" id="associate-error" for="inputAssociate"></label>
+                                                                <input type="text" name="associate" class="form-control" id="inputAssociate" placeholder="Associate" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <hr/>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="inputStreet">Street</label>
+                                                                <label class="form-error" id="street-error" for="inputStreet"></label>
+                                                                <input type="text" name="address.street" class="form-control" id="inputStreet" placeholder="Street" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="inputCity">City</label>
+                                                                        <label class="form-error" id="city-error" for="inputCity"></label>
+                                                                        <input type="text" name="address.city" class="form-control" id="inputCity" placeholder="City" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="inputPostcode">Postcode</label>
+                                                                        <label class="form-error" id="postcode-error" for="inputPostcode"></label>
+                                                                        <input type="text" name="address.postcode" class="form-control" id="inputPostcode" placeholder="Postcode" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="inputZone">Zone</label>
+                                                                        <label class="form-error" id="zone-error" for="inputZone"></label>
+                                                                        <input type="text" name="address.zone" class="form-control" id="inputZone" placeholder="Zone" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="inputCountry">Country</label>
+                                                                        <label class="form-error" id="country-error" for="inputCountry"></label>
+                                                                        <input type="text" name="address.country" class="form-control" id="inputCountry" placeholder="Country" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <hr/>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <label class="create-status" id="create-status"></label>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" id="close-create-dealer" onclick="refreshDealers()" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="create-dealer" type="submit" class="btn btn-default active">
+                            &nbsp;&nbsp;&nbsp;Create&nbsp;&nbsp;&nbsp;<i class="fa fa-user-plus" aria-hidden="true">&nbsp;</i>
+                        </button>
                     </div>
                 </div>
+                <!-- /.modal-content -->
             </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+
+        <!-- Edit dealer modal -->
+        <div class="modal fade" id="edit-dealer-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" id="exit-edit-dealer" onclick="refreshDealers()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title" id="gridSystemModalLabel">Dealer</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="content col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-8 col-xs-8">
+                                        <div class="thumbnail">
+                                            <div class="form-content">
+                                                <form method="put">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="editName">Name</label>
+                                                                <label class="form-error" id="edit-name-error" for="editName">&nbsp;</label>
+                                                                <input type="text" name="name" class="form-control" id="editName" placeholder="Name" />
+                                                                <input type="text" hidden="true" name="name" class="form-control" id="editId" placeholder="Id" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="editEmail">Email</label>
+                                                                        <label class="form-error" id="edit-email-error" for="editEmail">&nbsp;</label>
+                                                                        <input type="email" name="email" class="form-control" id="editEmail" placeholder="Email" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="editPhone">Phone</label>
+                                                                        <label class="form-error" id="edit-phone-error" for="editPhone">&nbsp;</label>
+                                                                        <input type="text" name="phone" class="form-control" id="editPhone" placeholder="Phone" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="editAssociate">Associate</label>
+                                                                <label class="form-error" id="edit-associate-error" for="editAssociate"></label>
+                                                                <input type="text" name="associate" class="form-control" id="editAssociate" placeholder="Associate" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <hr/>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label for="editStreet">Street</label>
+                                                                <label class="form-error" id="edit-street-error" for="editStreet"></label>
+                                                                <input type="text" name="address.street" class="form-control" id="editStreet" placeholder="Street" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="editCity">City</label>
+                                                                        <label class="form-error" id="city-error" for="editCity"></label>
+                                                                        <input type="text" name="address.city" class="form-control" id="editCity" placeholder="City" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="editPostcode">Postcode</label>
+                                                                        <label class="form-error" id="edit-postcode-error" for="editPostcode"></label>
+                                                                        <input type="text" name="address.postcode" class="form-control" id="editPostcode" placeholder="Postcode" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="editZone">Zone</label>
+                                                                        <label class="form-error" id="edit-zone-error" for="editZone"></label>
+                                                                        <input type="text" name="address.zone" class="form-control" id="editZone" placeholder="Zone" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6">
+                                                                    <div class="form-group">
+                                                                        <label for="editCountry">Country</label>
+                                                                        <label class="form-error" id="edit-country-error" for="editCountry"></label>
+                                                                        <input type="text" name="address.country" class="form-control" id="editCountry" placeholder="Country" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <hr/>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <label class="edit-status" id="edit-status"></label>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="products col-lg-4 col-xs-4">
+                                        <div class="product thumbnail">
+                                            <div class="thumbnail">
+                                                <p>
+                                                    <i class="fa fa-archive" aria-hidden="true"></i>&nbsp; BMC - 4
+                                                </p>
+                                            </div>
+                                            <div class="thumbnail">
+                                                <p>
+                                                    <i class="fa fa-archive" aria-hidden="true"></i>&nbsp; DT/BMC - 4
+                                                </p>
+                                            </div>
+                                            <a href="#"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                            <hr/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="close-edit-dealer" onclick="refreshDealers()" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="update-dealer" type="submit" class="btn btn-default active">
+                            &nbsp;&nbsp;Edit&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true">&nbsp;</i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <!-- dealer notes modal -->
+        <div class="modal fade" id="dealer-notes-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" id="exit-dealer-notes" onclick="refreshDealers()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" id="gridSystemModalLabel">Notes</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="jumbotron">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="notes-search col-xs-6">
+                                        <input id="search-dealer-note" type="text" class="form-control" placeholder="Search" />
+                                    </div>
+                                    <div class="notes-control col-xs-6">
+                                        <h2>
+                                            <a onclick="removeFirstNote()" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>&nbsp;
+                                            <a onclick="addNewNote()" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="notes" class="col-xs-12">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
 
         <div class="row">
@@ -82,9 +360,11 @@
             </div>
             <div class="col-lg-6 col-sm-6 col-xs-6">
                 <div id="dealer-bar">
-                    <h4><a href="./new-dealer.html" th:href="@{/dealers/new}"><i class="fa fa-user-plus" aria-hidden="true"></i></a>&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i>
-&nbsp;<i class="fa fa-envelope" aria-hidden="true"></i>
-</h4>
+                    <h4>
+                    <a data-toggle="modal" href="#" data-target="#new-dealer"><i class="fa fa-user-plus" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                    <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </h4>
                 </div>
             </div>
         </div>
@@ -98,7 +378,7 @@
             </div>
         </div>
         <div class="row">
-            <div id="id-dealer" th:each="dealer : ${dealers}" class="col-lg-3 col-sm-4 col-xs-6">
+            <div id="id-dealer" th:each="dealer,iterStat : ${dealers}" class="col-lg-3 col-sm-4 col-xs-6">
                 <div id="content">
                     <div class="thumbnail">
                         <h5 th:text="${dealer.name}">John Malcovich</h5>
@@ -108,7 +388,11 @@
                         <hr/>
                         <p class="address" th:text="${dealer.address.city}">Bleak Town</p>
                         <hr/>
-                        <p><i class="fa fa-pencil"></i>&nbsp;&nbsp;<i class="fa fa-thumb-tack" aria-hidden="true"></i></p>
+                        <button data-toggle="modal" th:onclick="'onEditDealer(' + ${dealer.id} + ')'" data-target="#edit-dealer-modal" href="#" id="edit-dealer" type="button" class="btn btn-link"><i class="fa fa-pencil"></i>
+                        </button>
+                        <button data-toggle="modal" th:onclick="'getAllNotesForDealer(' + ${dealer.id} + ')'" onclick="getAllNotesForDealer(1)" id="get-dealer-notes" type="button" class="btn btn-link" data-target="#dealer-notes-modal"><i class="fa fa-comments" aria-hidden="true"></i>
+                        </button>
+                        <button id="edit-dealer" type="button" class="btn btn-link"><i class="fa fa-envelope" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>

@@ -6,8 +6,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,6 +23,10 @@ import static org.apache.commons.lang3.builder.ToStringStyle.*;
 @Entity
 @Table(name = "dealer")
 public class Dealer {
+    private static final String NOT_EMPTY_ERROR = "cannot be empty";
+    private static final String INVALID_ERROR = "is invalid";
+    
+    private static final String EMAIL_PATTERN = "^(.+)@(.+)$";
     
     @Id
     @GeneratedValue
@@ -27,20 +34,26 @@ public class Dealer {
     
     @NaturalId(mutable = true)
     @Column(nullable = false)
+    @NotEmpty(message = NOT_EMPTY_ERROR)
     private String name;
     
     @NaturalId(mutable = true)
     @Column(nullable = false)
+    @NotEmpty(message = NOT_EMPTY_ERROR)
+    @Pattern(regexp = EMAIL_PATTERN, message = INVALID_ERROR)
     private String email;
     
     @NaturalId(mutable = true)
     @Column(nullable = false)
+    @NotEmpty(message = NOT_EMPTY_ERROR)
     private String phone;
     
     @Column
+    @NotEmpty(message = NOT_EMPTY_ERROR)
     private String associate;
     
     @Embedded
+    @Valid
     private Address address;
     
     @ManyToMany(cascade = PERSIST)
@@ -49,11 +62,9 @@ public class Dealer {
             joinColumns = {@JoinColumn(name = "dealer_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
     
-    protected Dealer() {
-        products = new HashSet<Product>();
-    }
+    protected Dealer() {}
     
     private Dealer(Builder builder) {
         this.id = builder.id;
@@ -168,18 +179,6 @@ public class Dealer {
     
     public Set<Product> getProducts() {
         return Collections.unmodifiableSet(products);
-    }
-    
-    public DealerForm toDealerForm() {
-        DealerForm dealerForm = new DealerForm();
-        
-        dealerForm.setName(getName());
-        dealerForm.setEmail(getEmail());
-        dealerForm.setPhone(getPhone());
-        dealerForm.setAssociate(getAssociate());
-        dealerForm.setAddress(getAddress().toAddressForm());
-        
-        return dealerForm;
     }
     
     @Override

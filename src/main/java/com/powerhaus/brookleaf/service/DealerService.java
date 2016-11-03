@@ -10,10 +10,10 @@ public interface DealerService {
     List<Dealer> createDealers(List<Dealer> dealers);
     Dealer createDealer(Dealer dealer);
     
+    Dealer findDealer(Long id);
     Set<Dealer> findAllDealers();
     Set<Dealer> findDealersByProductName(String name);
     Set<Dealer> findDealersByProductType(String type);
-    
     Set<Dealer> findDealersByZone(String zone);
     Set<Dealer> findDealersByName(String name);
     
