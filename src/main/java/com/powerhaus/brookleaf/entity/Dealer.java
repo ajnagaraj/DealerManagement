@@ -11,10 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static javax.persistence.CascadeType.*;
 import static org.apache.commons.lang3.builder.ToStringBuilder.*;
@@ -63,6 +60,9 @@ public class Dealer {
             inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
     private Set<Product> products = new HashSet<>();
+    
+    @OneToMany(mappedBy = "dealer")
+    private List<Note> notes = new ArrayList<>();
     
     protected Dealer() {}
     

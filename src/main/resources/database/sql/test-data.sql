@@ -38,3 +38,10 @@ INSERT INTO
 `dealer_product` (`dealer_id`, `product_id`)
 VALUES
 (2, 1);
+
+INSERT INTO
+`note` (`id`, `time`,`text`, `dealer_id`)
+VALUES
+(1, '15:6, Fri Nov 04 2016','Follow up failed, dealer not interested', 1),
+(2, '15:8, Fri Nov 04 2016','Dealer changed mind. Spoke of a ghost. He is ready to invest', 1);
+

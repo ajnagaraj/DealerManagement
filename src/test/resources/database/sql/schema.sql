@@ -34,3 +34,12 @@ CREATE TABLE `dealer_product` (
 CREATE TABLE `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 );
+
+CREATE TABLE `note` (
+  `id` bigint(20) NOT NULL,
+  `time` varchar(255) DEFAULT NULL,
+  `text` varchar(255) DEFAULT NULL,
+  `dealer_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`dealer_id`) REFERENCES `dealer` (`id`)
+);
