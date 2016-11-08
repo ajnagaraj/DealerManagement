@@ -107,17 +107,4 @@ public class DealerController {
         return new Error("We have just encountered a problem. We will get back to you shortly.");
     }
     
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-    @ResponseBody
-    public DealerError processingFailed(Exception processFailure) {
-        
-        DealerError error = new DealerError();
-        error.setNameError(processFailure.getMessage());
-        
-        processFailure.printStackTrace();
-        
-        return error;
-    }
-    
 }
