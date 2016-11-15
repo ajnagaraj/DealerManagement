@@ -291,7 +291,7 @@ var onEditDealer = function (id) {
         },
         error: function (error) {
             validationErrors = JSON.parse(error.responseText);
-            setValidationErrors(validationErrors);
+            console.log(validationErrors);
         }
     });
 }
@@ -313,41 +313,51 @@ var bindDealer = function (dealer) {
 
 
 var getAllNotesForDealer = function (id) {
-    var notes = {
-        "notes": [
-            {
-                "time": "12:23 Wednesday, 10 January 2016",
-                "text": "Poor little mittens have lost their kittens."
-                },
-            {
-                "time": "10:23 Tuesday, 8 February 2016",
-                "text": "Itsy went up the wall."
-                },
-            {
-                "time": "18:23 Friday, 12 November 2016",
-                "text": "Life is like a dream."
-                }]
-    };
+    var notes;
 
-    $.each($("#notes").children(), function () {
-        this.remove();
-    });
+    $.ajax({
+        type: "GET",
+        accept: "application/json",
+        url: "/dealer-management/notes/dealer/" + id,
+        timeout: 100000,
+        success: function (result) {
+            $.each($("#notes").children(), function () {
+                this.remove();
+            });
 
-    $.each(notes, function () {
-        $.each(this, function (k, v) {
-            $("#notes").append(formNote(this.time, this.text));
-        });
+            $.each(result, function () {
+                console.log(this);
+                $("#notes").append(formEditNote(this.id, this.time, this.text, this.dealer.id));
+            });
+        },
+        error: function (error) {
+            console.log(error);
+            validationErrors = JSON.parse(error.responseText);
+            setValidationErrors(validationErrors);
+        }
     });
 }
 
-var formNote = function (time, text) {
+var formEditNote = function (noteId, time, text, dealerId) {
     nextId += 1;
     var textAreaId = "text-area-" + nextId;
-    
-    var note = "<div class=\"col-xs-12\" id=\"div-dealer-note\" class=\"form-group\"><div class=\"time col-xs-10\"><label for=\"text-area\">" + time + "</label></div><div class=\"note-save col-xs-2\"><a onclick=\"saveText('" + textAreaId + "')\" href=\"#\"><i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a></div><textarea class=\"form-control\" id=\"" + textAreaId + "\" rows=\"3\">" + text + "</textarea></div>";
+    var timeId = "time-id-" + nextId;
+
+    var note = "<div class=\"col-xs-12\" id=\"div-dealer-note\" class=\"form-group\"><div class=\"time col-xs-10\"><label id=\"" + noteId + "\" hidden=\"true\">" + noteId + "</label><label id=\"" + timeId + "\" for=\"text-area\">" + time + "</label></div><div class=\"note-save col-xs-2\"><a onclick=\"editText('" + noteId + "', '" + textAreaId + "', '" + timeId + "', '" + dealerId + "')\" href=\"#\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a></div><textarea class=\"form-control\" id=\"" + textAreaId + "\" rows=\"3\">" + text + "</textarea></div>";
 
     return note;
 }
+
+var formNewNote = function (time, text) {
+    nextId += 1;
+    var textAreaId = "text-area-" + nextId;
+    var timeId = "time-id-" + nextId;
+
+    var note = "<div class=\"col-xs-12\" id=\"div-dealer-note\" class=\"form-group\"><div class=\"time col-xs-10\"><label id=\"" + timeId + "\" for=\"text-area\">" + time + "</label></div><div class=\"note-save col-xs-2\"><a onclick=\"saveText('" + textAreaId + "')\" href=\"#\"><i class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a></div><textarea class=\"form-control\" id=\"" + textAreaId + "\" rows=\"3\">" + text + "</textarea></div>";
+
+    return note;
+}
+
 
 var removeFirstNote = function () {
     var notes = $("#notes").children();
@@ -362,7 +372,7 @@ var addNewNote = function () {
 
     var time = today.getHours() + ":" + today.getMinutes() + ", " + today.toDateString();
 
-    $("#notes").prepend(formNote(time, ""));
+    $("#notes").prepend(formNewNote(time, ""));
 }
 
 var timeNowFormatted = function () {
@@ -415,14 +425,44 @@ dealerNoteSearch.keyup(function (event) {
                 dealerNote.show();
             }
         });
-        
+
         dealerNoteSearch.blur();
     }
 });
 
-var saveText = function(textAreaId) {
+var editText = function (noteId, textAreaId, timeId, dealerId) {
     textAreaId = "#" + textAreaId;
-    $(textAreaId).css("color", "#339CFF");
+    $(textAreaId).css("color", "#F39C12");
+    $(textAreaId).text($(textAreaId).val());
+    
+    var note = {
+        "id": noteId,
+        "time": $("#" + timeId).text(),
+        "text": $(textAreaId).val(),
+        "dealer": {
+            "id": dealerId
+        }
+    };
+    
+    $.ajax({
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(note),
+        url: "/dealer-management/notes",
+        dataType: 'json',
+        timeout: 100000,
+        success: function (result) {
+            console.log("edit note result: " + result);
+        },
+        error: function (error) {
+            console.log("edit note error: " + error.responseText);
+        }
+    });
+}
+
+var saveText = function (textAreaId) {
+    textAreaId = "#" + textAreaId;
+    $(textAreaId).css("color", "#F39C12");
     $(textAreaId).text($(textAreaId).val());
     console.log($(textAreaId).val());
 }

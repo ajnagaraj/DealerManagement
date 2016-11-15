@@ -1,13 +1,14 @@
 package com.powerhaus.brookleaf.controller;
 
+import com.powerhaus.brookleaf.entity.Dealer;
 import com.powerhaus.brookleaf.entity.Note;
 import com.powerhaus.brookleaf.exception.ServiceException;
 import com.powerhaus.brookleaf.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -26,6 +27,16 @@ public class NoteController {
     @RequestMapping(value = "/dealer/{dealerId}", method = GET)
     public List<Note> getNotesByDealerId(@PathVariable Long dealerId) {
         return noteService.findNotes(dealerId);
+    }
+    
+    @RequestMapping(method = PUT)
+    public Note editNote(@Valid @RequestBody Note note) {
+        return noteService.updateNote(note);
+    }
+    
+    @RequestMapping(method = POST)
+    public Note createNote(@Valid @RequestBody Note note) {
+        return noteService.createNote(note);
     }
     
     @ExceptionHandler(ServiceException.class)

@@ -181,6 +181,10 @@ public class Dealer {
         return Collections.unmodifiableSet(products);
     }
     
+    public List<Note> getNotes() {
+        return Collections.unmodifiableList(notes);
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o)

@@ -75,7 +75,7 @@ public class Note {
         builder.id = note.id;
         builder.time = note.time;
         builder.text = note.text;
-        builder.dealer = note.dealer;
+        builder.dealer = Dealer.builder(note.dealer).build();
         
         return builder;
     }
